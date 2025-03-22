@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Course } from '../../course.model';
 
 @Component({
@@ -9,8 +9,11 @@ import { Course } from '../../course.model';
 export class CourseItemComponent {
 
   @Input() course: Course;
-  
+  @Output() courseSelected = new EventEmitter<void>();
 
+  onSelected(){
+    this.courseSelected.emit();
+  }
 
 
 }

@@ -8,7 +8,8 @@
 <div class="row">
   <div class="col-xs-12">
     <app-course-item *ngFor="let courseEL of courses"
-    [course]="courseEL"></app-course-item>
+    [course]="courseEL"
+    (courseSelected)="onCourseSelected(courseEL)"></app-course-item>
   </div>
 </div>
 

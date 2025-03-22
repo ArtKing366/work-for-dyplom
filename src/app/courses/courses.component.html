@@ -1,11 +1,14 @@
 
 <div class="row">
   <div class="col-md-5">
-    <app-course-list></app-course-list>
+    <app-course-list (courseWasSelected)="selectedCourse = $event"></app-course-list>
   </div>
   
   <div class="col-md-7">
-    <app-course-detail></app-course-detail>
+    <app-course-detail *ngIf="selectedCourse; else infoText" [course]="selectedCourse"></app-course-detail>
+    <ng-template #infoText>
+      <p>Select course</p>
+    </ng-template>
   </div>
 </div>
 
