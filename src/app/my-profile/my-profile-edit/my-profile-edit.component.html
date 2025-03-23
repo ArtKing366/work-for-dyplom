@@ -1,33 +1,27 @@
-<div class="edit-profile-container">
-  <h2>Edit Profile</h2>
+<h2 mat-dialog-title>Edit Profile</h2>
+<div mat-dialog-content>
+  <form>
+    <label for="firstName">First Name</label>
+    <input type="text" [(ngModel)]="profile.firstName" name="firstName" id="firstName" class="form-control">
 
-  <form (ngSubmit)="saveChanges()">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" id="name" class="form-control" [(ngModel)]="user.name" name="name">
-    </div>
+    <label for="lastName">Last Name</label>
+    <input type="text" [(ngModel)]="profile.lastName" name="lastName" id="lastName" class="form-control">
 
-    <div class="form-group">
-      <label for="nickname">Nickname</label>
-      <input type="text" id="nickname" class="form-control" [(ngModel)]="user.nickname" name="nickname">
-    </div>
+    <label for="nickname">Nickname</label>
+    <input type="text" [(ngModel)]="profile.nickname" name="nickname" id="nickname" class="form-control">
 
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" class="form-control" [(ngModel)]="user.email" name="email">
-    </div>
+    <label for="age">Age</label>
+    <input type="number" [(ngModel)]="profile.age" name="age" id="age" class="form-control">
 
-    <div class="form-group">
-      <label for="age">Age</label>
-      <input type="number" id="age" class="form-control" [(ngModel)]="user.age" name="age">
-    </div>
+    <label for="email">Email</label>
+    <input type="email" [(ngModel)]="profile.email" name="email" id="email" class="form-control">
 
-    <div class="form-group">
-      <label for="imageUrl">Profile Image URL</label>
-      <input type="text" id="imageUrl" class="form-control" [(ngModel)]="user.imageUrl" name="imageUrl">
-    </div>
-
-    <button type="submit" class="btn btn-success">Save Changes</button>
-    <button type="button" class="btn btn-danger" (click)="cancelEdit()">Cancel</button>
+    <label for="bio">Bio</label>
+    <textarea [(ngModel)]="profile.bio" name="bio" id="bio" class="form-control"></textarea>
   </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClear()">Clear</button>
+  <button mat-button (click)="onSkip()">Skip</button>
+  <button mat-button color="primary" (click)="onSave()">Save</button>
 </div>

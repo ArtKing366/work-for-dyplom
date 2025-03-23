@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-my-profile-edit',
@@ -6,21 +7,33 @@ import { Component } from '@angular/core';
   styleUrls: ['./my-profile-edit.component.css']
 })
 export class MyProfileEditComponent {
-  user = {
-    name: 'John Doe',
-    nickname: 'johnny123',
-    email: 'johndoe@example.com',
-    age: 25,
-    imageUrl: 'https://www.w3schools.com/w3images/avatar2.png'
-  };
 
-  saveChanges() {
-    console.log('Changes saved:', this.user);
-    // Здесь можно добавить логику для сохранения данных
+  profile = { ...this.data };
+
+  constructor(
+    public dialogRef: MatDialogRef<MyProfileEditComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
+
+  // Закрытие диалога без сохранения
+  onSkip() {
+    this.dialogRef.close();
   }
 
-  cancelEdit() {
-    console.log('Edit cancelled');
-    // Вернуть данные обратно или скрыть форму редактирования
+  // Сохранение изменений и закрытие диалога
+  onSave() {
+    this.dialogRef.close(this.profile);
+  }
+
+  // Очистка всех полей
+  onClear() {
+    this.profile = {
+      firstName: '',
+      lastName: '',
+      nickname: '',
+      age: null,
+      email: '',
+      bio: ''
+    };
   }
 }

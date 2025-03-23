@@ -1,12 +1,10 @@
 <div class="profile-container">
   <div class="profile-header">
-    <img [src]="user.imageUrl" alt="Profile Picture" class="profile-image">
-    <h2>{{ user.name }}</h2>
-    <p>{{ user.nickname }} | {{ user.age }} years old</p>
-    <p>{{ user.email }}</p>
+    <h2>{{ profile.firstName }} {{ profile.lastName }}</h2>
+    <p>Nickname: {{ profile.nickname }}</p>
+    <p>Age: {{ profile.age }}</p>
+    <p>Email: {{ profile.email }}</p>
+    <p>About me: {{ profile.bio }}</p>
   </div>
-
-  <div class="profile-actions">
-    <button class="btn btn-warning" (click)="editProfile()">Edit Profile</button>
-  </div>
+  <button class="btn btn-primary" (click)="openEditProfile()">Edit Profile</button>
 </div>

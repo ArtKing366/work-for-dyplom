@@ -2,6 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+// Импорты для работы с Material
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -14,6 +19,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { MyProfileEditComponent } from './my-profile/my-profile-edit/my-profile-edit.component';
 import { ShoppingEditComponent } from './shopping-courses/shopping-edit/shopping-edit.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -32,8 +38,14 @@ import { AboutUsComponent } from './about-us/about-us.component';
   imports: [
     BrowserModule,
     FormsModule,
+    MatDialogModule, // Добавь MatDialogModule для модальных окон
+    MatButtonModule, // Модуль кнопок
+    MatInputModule,  // Модуль для ввода данных
+    MatFormFieldModule // Модуль для обертки инпутов
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
