@@ -13,6 +13,7 @@ import { ShoppingCoursesComponent } from './shopping-courses/shopping-courses.co
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { MyProfileEditComponent } from './my-profile/my-profile-edit/my-profile-edit.component';
 import { ShoppingEditComponent } from './shopping-courses/shopping-edit/shopping-edit.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ShoppingEditComponent } from './shopping-courses/shopping-edit/shopping
     ShoppingCoursesComponent,
     MyProfileComponent,
     MyProfileEditComponent,
-    ShoppingEditComponent
+    ShoppingEditComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

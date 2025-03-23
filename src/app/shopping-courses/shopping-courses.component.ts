@@ -13,5 +13,9 @@ export class ShoppingCoursesComponent {
     new Section(2,  'DOM structure', 13),
   ];
 
+  onSectionAdded(course: Section){
+    this.courses.push(course);
+  }
+
 
 }

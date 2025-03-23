@@ -8,7 +8,7 @@ import { Course } from '../course.model';
 })
 export class CourseDetailComponent {
   @Input() course: Course;
-
+  
   
 
 
