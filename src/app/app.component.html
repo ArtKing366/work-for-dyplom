@@ -8,7 +8,7 @@
       <app-shopping-courses *ngIf="loadedFeature === 'my-course'"> </app-shopping-courses>
       <app-my-profile *ngIf="loadedFeature === 'my-profile'"></app-my-profile>
       
-      <app-about-us></app-about-us>
+      <app-about-us *ngIf="loadedFeature === 'about-as'"></app-about-us>
     </div>
   </div>
 </div>

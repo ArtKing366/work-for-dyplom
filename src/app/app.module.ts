@@ -20,6 +20,7 @@ import { MyProfileEditComponent } from './my-profile/my-profile-edit/my-profile-
 import { ShoppingEditComponent } from './shopping-courses/shopping-edit/shopping-edit.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AboutUsModalComponent } from './about-us/about-us-modal/about-us-modal.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     MyProfileComponent,
     MyProfileEditComponent,
     ShoppingEditComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    AboutUsModalComponent
   ],
   imports: [
     BrowserModule,
