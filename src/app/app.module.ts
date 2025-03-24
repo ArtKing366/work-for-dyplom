@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-// Импорты для работы с Material
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -21,6 +20,7 @@ import { ShoppingEditComponent } from './shopping-courses/shopping-edit/shopping
 import { AboutUsComponent } from './about-us/about-us.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AboutUsModalComponent } from './about-us/about-us-modal/about-us-modal.component';
+import { DropdownDirective } from './shared/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,8 @@ import { AboutUsModalComponent } from './about-us/about-us-modal/about-us-modal.
     MyProfileEditComponent,
     ShoppingEditComponent,
     AboutUsComponent,
-    AboutUsModalComponent
+    AboutUsModalComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
