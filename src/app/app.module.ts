@@ -21,6 +21,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AboutUsModalComponent } from './about-us/about-us-modal/about-us-modal.component';
 import { DropdownDirective } from './shared/dropdown.directive';
+import { CourseService } from './courses/course.service';
+import { ShoppingCoursesService } from './shopping-courses/shopping-courses.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
     AboutUsComponent,
     AboutUsModalComponent,
     DropdownDirective,
-    
+
     
   ],
   imports: [
@@ -49,7 +51,9 @@ import { DropdownDirective } from './shared/dropdown.directive';
     MatFormFieldModule // Модуль для обертки инпутов
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    CourseService,
+    ShoppingCoursesService
   ],
   bootstrap: [AppComponent]
 })

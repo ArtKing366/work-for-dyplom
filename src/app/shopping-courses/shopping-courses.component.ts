@@ -1,21 +1,23 @@
 import { Component } from '@angular/core';
-import {  Section } from '../shared/section.model';
+import { Section } from '../shared/section.model';
+import { ShoppingCoursesService } from './shopping-courses.service';
 
 @Component({
   selector: 'app-shopping-courses',
   templateUrl: './shopping-courses.component.html',
-  styleUrls: ['./shopping-courses.component.css'] 
+  styleUrls: ['./shopping-courses.component.css'],
 })
 export class ShoppingCoursesComponent {
+  sections: Section[];
 
-  courses: Section [] = [
-    new Section(1,  'Section about array of tasks', 45),
-    new Section(2,  'DOM structure', 13),
-  ];
+  constructor(private shoppingCoursesService: ShoppingCoursesService) {}
 
-  onSectionAdded(course: Section){
-    this.courses.push(course);
+  ngOnInit() {
+    this.sections = this.shoppingCoursesService.getShoppingCourses();
+    this.shoppingCoursesService.sectionChanged.subscribe(
+      (sections: Section[]) => {
+        this.sections = sections;
+      }
+    );
   }
-
-
 }

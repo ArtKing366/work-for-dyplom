@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 import { Section } from '../../shared/section.model';
+import { ShoppingCoursesService } from '../shopping-courses.service';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -12,7 +13,13 @@ export class ShoppingEditComponent {
   @ViewChild('timeInput') timeInputRef: ElementRef;
   @ViewChild('numberInput') numberInputRef: ElementRef;
 
-  @Output() sectionAdded = new EventEmitter<Section>();
+  // @Output() sectionAdded = new EventEmitter<Section>();
+
+  
+  constructor(private shoppingCoursesService: ShoppingCoursesService ){}
+
+  ngOnInit(){}
+
 
   onAddItem() {
     const secDesc = this.descInputRef.nativeElement.value;
@@ -20,6 +27,8 @@ export class ShoppingEditComponent {
     const secNumber = this.numberInputRef.nativeElement.value;
 
     const newSection = new Section(secNumber, secDesc, secTime);
-    this.sectionAdded.emit(newSection);
+
+    this.shoppingCoursesService.addtoShoppingCourses(newSection);
+    // this.sectionAdded.emit(newSection);
   }
 }

@@ -1,14 +1,14 @@
 
 <div class="row">
   <div class="col-xs-10">
-    <app-shopping-edit (sectionAdded)="onSectionAdded($event)"></app-shopping-edit>
+    <app-shopping-edit></app-shopping-edit>
     <hr>
     <ul class="list-group">
       
-      <a class="list-group-item" style="cursor: pointer;" *ngFor="let course of courses">
-        {{ course.numberOfSection }}. 
-        {{ course.descriptions }} -
-        {{ course.time  }} {{ course.typeOfTime  }}
+      <a class="list-group-item" style="cursor: pointer;" *ngFor="let section of sections">
+        {{ section.numberOfSection }}. 
+        {{ section.descriptions }} -
+        {{ section.time  }} {{ section.typeOfTime  }}
       </a>
     </ul>
   </div>
