@@ -36,7 +36,9 @@ import { DropdownDirective } from './shared/dropdown.directive';
     ShoppingEditComponent,
     AboutUsComponent,
     AboutUsModalComponent,
-    DropdownDirective
+    DropdownDirective,
+    
+    
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Course } from '../../course.model';
+import { CourseService } from '../../course.service';
 
 @Component({
   selector: 'app-course-item',
@@ -9,10 +10,15 @@ import { Course } from '../../course.model';
 export class CourseItemComponent {
 
   @Input() course: Course;
-  @Output() courseSelected = new EventEmitter<void>();
+
+
+  constructor(private courseService: CourseService){}
+
+  ngOnInit(){}
+
 
   onSelected(){
-    this.courseSelected.emit();
+    this.courseService.courseSelected.emit(this.course);
   }
 
 
