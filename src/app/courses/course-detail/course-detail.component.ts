@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Course } from '../course.model';
+import { CourseService } from '../course.service';
 
 @Component({
   selector: 'app-course-detail',
@@ -9,7 +10,12 @@ import { Course } from '../course.model';
 export class CourseDetailComponent {
   @Input() course: Course;
   
-  
+  constructor(private courseService: CourseService){}
 
+  ngOnInit(){}
+
+  onAddToShoppingList(){
+    this.courseService.addCourseToShoppingCourses(this.course);
+  }
 
 }
