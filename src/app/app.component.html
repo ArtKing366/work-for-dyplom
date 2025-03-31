@@ -1,9 +1,19 @@
 <app-header (featureSelected)="onNavigate($event)"></app-header>
 
+<div class="div">
+  <div class="col md-12">
+  <app-marquee-banner ></app-marquee-banner>
+
+  </div>
+</div>
 
 <div class="container">
+  
   <div class="row">
+  <!-- <app-marquee-banner ></app-marquee-banner> -->
+    
     <div class="col-md-12">
+      
       <app-courses *ngIf="loadedFeature === 'courses'"></app-courses>
       <app-shopping-courses *ngIf="loadedFeature === 'my-course'"> </app-shopping-courses>
       <app-my-profile *ngIf="loadedFeature === 'my-profile'"></app-my-profile>

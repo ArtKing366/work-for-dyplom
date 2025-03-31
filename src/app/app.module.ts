@@ -23,6 +23,7 @@ import { AboutUsModalComponent } from './about-us/about-us-modal/about-us-modal.
 import { DropdownDirective } from './shared/dropdown.directive';
 import { CourseService } from './courses/course.service';
 import { ShoppingCoursesService } from './shopping-courses/shopping-courses.service';
+import { MarqueeBannerComponent } from './courses/marquee-banner/marquee-banner.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ShoppingCoursesService } from './shopping-courses/shopping-courses.serv
     AboutUsComponent,
     AboutUsModalComponent,
     DropdownDirective,
+    MarqueeBannerComponent,
 
     
   ],
