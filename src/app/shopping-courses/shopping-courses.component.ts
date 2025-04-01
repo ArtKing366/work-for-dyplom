@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Course } from '../courses/course.model';
 import { Section } from '../shared/section.model';
 import { ShoppingCoursesService } from './shopping-courses.service';
+import { CourseService } from '../courses/course.service';
 
 @Component({
   selector: 'app-shopping-courses',
@@ -8,16 +10,28 @@ import { ShoppingCoursesService } from './shopping-courses.service';
   styleUrls: ['./shopping-courses.component.css'],
 })
 export class ShoppingCoursesComponent {
-  sections: Section[];
+  courses: Course[] = [];
+  sections: Section[] = [];
+  selectedCourse: Course | null = null;
 
-  constructor(private shoppingCoursesService: ShoppingCoursesService) {}
+  constructor(
+    private shoppingCoursesService: ShoppingCoursesService,
+    private courseService: CourseService
+  ) {}
 
   ngOnInit() {
+    this.courses = this.shoppingCoursesService.getCourses();
     this.sections = this.shoppingCoursesService.getShoppingCourses();
-    this.shoppingCoursesService.sectionChanged.subscribe(
-      (sections: Section[]) => {
-        this.sections = sections;
+    
+    this.shoppingCoursesService.coursesChanged.subscribe(
+      (courses: Course[]) => {
+        this.courses = courses;
       }
     );
+  }
+
+  onSelectCourse(course: Course) {
+    this.selectedCourse = course;
+    this.courseService.courseSelected.emit(course);
   }
 }

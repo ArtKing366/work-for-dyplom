@@ -1,15 +1,12 @@
-
 <div class="row">
   <div class="col-md-5">
-    <app-course-list ></app-course-list>
+    <app-course-list></app-course-list>
   </div>
   
   <div class="col-md-7">
     <app-course-detail *ngIf="selectedCourse; else infoText" [course]="selectedCourse"></app-course-detail>
     <ng-template #infoText>
-      <p>Select course</p>
+      <p>Please select a course</p>
     </ng-template>
   </div>
 </div>
-
-

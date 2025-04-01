@@ -1,16 +1,40 @@
-
 <div class="row">
   <div class="col-xs-10">
-    <app-shopping-edit></app-shopping-edit>
-    <hr>
-    <ul class="list-group">
-      
-      <a class="list-group-item" style="cursor: pointer;" *ngFor="let section of sections">
-        {{ section.numberOfSection }}. 
-        {{ section.descriptions }} -
-        {{ section.time  }} {{ section.typeOfTime  }}
+    <div class="list-group">
+      <a class="list-group-item clearfix" 
+         *ngFor="let course of courses"
+         (click)="onSelectCourse(course)"
+         style="cursor: pointer;">
+        <div class="pull-left">
+          <h4 class="list-group-item-heading">{{ course.name }}</h4>
+          <p class="list-group-item-text">{{ course.description }}</p>
+        </div>
+        <span class="pull-right">
+          <img
+            [src]="course.imagePath"
+            alt="{{ course.name }}"
+            class="img-responsive"
+            style="max-height: 50px"
+          />
+        </span>
       </a>
+    </div>
+
+    <div *ngIf="selectedCourse">
+      <app-course-detail [course]="selectedCourse"></app-course-detail>
+    </div>
+
+    <hr>
+    
+    <app-shopping-edit></app-shopping-edit>
+    
+    <hr>
+    
+    <h3 class="text-primary">Course Sections</h3>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let section of sections">
+        {{ section.numberOfSection }}. {{ section.descriptions }} - {{ section.time }} min
+      </li>
     </ul>
   </div>
 </div>
-

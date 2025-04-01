@@ -1,9 +1,13 @@
-import { EventEmitter } from "@angular/core";
+import { EventEmitter, Injectable } from "@angular/core";
 import { Course } from "./course.model";
 import { Section } from "../shared/section.model";
+import { ShoppingCoursesService } from "../shopping-courses/shopping-courses.service";
 
+@Injectable({ providedIn: 'root' })
 export class CourseService {
   courseSelected = new EventEmitter<Course>();
+
+  constructor(private shoppingCoursesService: ShoppingCoursesService) {}
 
   private courses: Course[] = [
     new Course(
@@ -28,5 +32,10 @@ export class CourseService {
 
   getCourses() {
     return this.courses.slice();
+  }
+
+  addCourseToMyCourses(course: Course) {
+    this.shoppingCoursesService.addCourse(course);
+    console.log('Course added to My Courses:', course);
   }
 }
