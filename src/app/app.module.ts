@@ -24,6 +24,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { CourseService } from './courses/course.service';
 import { ShoppingCoursesService } from './shopping-courses/shopping-courses.service';
 import { MarqueeBannerComponent } from './courses/marquee-banner/marquee-banner.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -47,10 +48,11 @@ import { MarqueeBannerComponent } from './courses/marquee-banner/marquee-banner.
   imports: [
     BrowserModule,
     FormsModule,
-    MatDialogModule, // Добавь MatDialogModule для модальных окон
-    MatButtonModule, // Модуль кнопок
-    MatInputModule,  // Модуль для ввода данных
-    MatFormFieldModule // Модуль для обертки инпутов
+    MatDialogModule, 
+    MatButtonModule, 
+    MatInputModule,  
+    MatFormFieldModule,
+    AppRoutingModule
   ],
   providers: [
     provideAnimationsAsync(),
