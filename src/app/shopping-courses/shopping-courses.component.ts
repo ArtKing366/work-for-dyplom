@@ -1,37 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Course } from '../courses/course.model';
 import { Section } from '../shared/section.model';
 import { ShoppingCoursesService } from './shopping-courses.service';
-import { CourseService } from '../courses/course.service';
 
 @Component({
   selector: 'app-shopping-courses',
   templateUrl: './shopping-courses.component.html',
   styleUrls: ['./shopping-courses.component.css'],
 })
-export class ShoppingCoursesComponent {
+export class ShoppingCoursesComponent implements OnInit {
   courses: Course[] = [];
-  sections: Section[] = [];
+  sections: Section[] = []; 
   selectedCourse: Course | null = null;
 
-  constructor(
-    private shoppingCoursesService: ShoppingCoursesService,
-    private courseService: CourseService
-  ) {}
+  constructor(private shoppingCoursesService: ShoppingCoursesService) {}
 
   ngOnInit() {
-    this.courses = this.shoppingCoursesService.getCourses();
-    this.sections = this.shoppingCoursesService.getShoppingCourses();
-    
-    this.shoppingCoursesService.coursesChanged.subscribe(
-      (courses: Course[]) => {
-        this.courses = courses;
-      }
-    );
+    this.courses = this.shoppingCoursesService.getCourses(); 
+    this.sections = this.shoppingCoursesService.getShoppingCourses(); 
+
+    this.shoppingCoursesService.sectionChanged.subscribe((sections: Section[]) => {
+      this.sections = sections;
+    });
   }
 
   onSelectCourse(course: Course) {
-    this.selectedCourse = course;
-    this.courseService.courseSelected.emit(course);
+    this.selectedCourse = course; 
+    this.sections = course.sections;
   }
 }

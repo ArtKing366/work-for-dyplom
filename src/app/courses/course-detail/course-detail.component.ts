@@ -27,7 +27,6 @@ export class CourseDetailComponent {
   }
 
   onAddToMyCourses() {
-    console.log('Adding course to My Courses:', this.course);
-    this.courseService.addCourseToMyCourses(this.course);
+    this.courseService.addCourseToMyCourses(this.course); 
   }
 }

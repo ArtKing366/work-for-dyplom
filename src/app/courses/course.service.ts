@@ -39,7 +39,7 @@ export class CourseService {
   }
 
   addCourseToMyCourses(course: Course) {
-    this.shoppingCoursesService.addCourse(course);
+    this.shoppingCoursesService.addCourse(course); 
     console.log('Course added to My Courses:', course);
   }
 }

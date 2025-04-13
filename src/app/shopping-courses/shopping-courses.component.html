@@ -1,10 +1,12 @@
 <div class="row">
   <div class="col-xs-10">
     <div class="list-group">
-      <a class="list-group-item clearfix" 
-         *ngFor="let course of courses"
-         (click)="onSelectCourse(course)"
-         style="cursor: pointer;">
+      <a
+        class="list-group-item clearfix"
+        *ngFor="let course of courses"
+        (click)="onSelectCourse(course)"
+        style="cursor: pointer;"
+      >
         <div class="pull-left">
           <h4 class="list-group-item-heading">{{ course.name }}</h4>
           <p class="list-group-item-text">{{ course.description }}</p>
@@ -21,7 +23,23 @@
     </div>
 
     <div *ngIf="selectedCourse">
-      <app-course-detail [course]="selectedCourse"></app-course-detail>
+      <h3>{{ selectedCourse.name }}</h3>
+      <p>{{ selectedCourse.description }}</p>
+      <img
+        [src]="selectedCourse.imagePath"
+        alt="{{ selectedCourse.name }}"
+        class="img-responsive"
+        style="max-height: 200px"
+      />
+      <h4>Sections:</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let section of selectedCourse.sections"
+        >
+          {{ section.numberOfSection }}. {{ section.descriptions }} - {{ section.time }} min
+        </li>
+      </ul>
     </div>
 
     <hr>
