@@ -1,7 +1,6 @@
 <div class="div">
   <div class="col md-12">
   <app-marquee-banner ></app-marquee-banner>
-
   </div>
 </div>
 
@@ -11,9 +10,11 @@
   </div>
   
   <div class="col-md-7">
-    <app-course-detail *ngIf="selectedCourse; else infoText" [course]="selectedCourse"></app-course-detail>
+    <!-- <app-course-detail *ngIf="selectedCourse; else infoText" [course]="selectedCourse"></app-course-detail>
     <ng-template #infoText>
       <p>Please select a course</p>
-    </ng-template>
+    </ng-template> -->
+
+    <router-outlet></router-outlet>
   </div>
 </div>

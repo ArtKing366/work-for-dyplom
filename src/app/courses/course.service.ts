@@ -34,6 +34,10 @@ export class CourseService {
     return this.courses.slice();
   }
 
+  getCourse(index: number) {
+    return this.courses[index];
+  }
+
   addCourseToMyCourses(course: Course) {
     this.shoppingCoursesService.addCourse(course);
     console.log('Course added to My Courses:', course);

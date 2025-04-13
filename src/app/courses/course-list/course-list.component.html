@@ -7,8 +7,9 @@
 <hr>
 <div class="row">
   <div class="col-xs-12">
-    <app-course-item *ngFor="let courseEL of courses"
+    <app-course-item *ngFor="let courseEL of courses; let i = index"
     [course]="courseEL"
+    [index]="i"
     ></app-course-item>
   </div>
 </div>
