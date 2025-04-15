@@ -26,6 +26,7 @@ import { ShoppingCoursesService } from './shopping-courses/shopping-courses.serv
 import { MarqueeBannerComponent } from './courses/marquee-banner/marquee-banner.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CourseStartComponent } from './courses/course-start/course-start.component';
+import { CourseMakeComponent } from './courses/course-make/course-make.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { CourseStartComponent } from './courses/course-start/course-start.compon
     DropdownDirective,
     MarqueeBannerComponent,
     CourseStartComponent,
+    CourseMakeComponent,
 
     
   ],

@@ -10,7 +10,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1030; /* Выше чем navbar */
+  z-index: 1030; 
 }
 
 .marquee-content {
@@ -28,7 +28,7 @@
   }
 }
 
-/* Для корректного отображения под фиксированным баннером */
+
 body {
   padding-top: 40px;
 }
@@ -41,4 +41,11 @@ body {
   body {
     padding-top: 36px;
   }
+}
+
+a.list-group-item.active {
+  background-color: transparent !important; 
+  border: 2px solid #5f946e;
+  box-shadow: 0 0 0 2px #5f946e;
+  color: inherit !important; 
 }
