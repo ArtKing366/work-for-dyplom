@@ -1,34 +1,47 @@
-import { Component, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { Section } from '../../shared/section.model';
 import { ShoppingCoursesService } from '../shopping-courses.service';
+import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
-  styleUrl: './shopping-edit.component.css'
+  styleUrl: './shopping-edit.component.css',
 })
-export class ShoppingEditComponent {
+export class ShoppingEditComponent implements OnDestroy {
+  @ViewChild('f') slForm: NgForm;
+  subscription: Subscription;
+  editMode = false;
+  editedItemIndex: number;
+  editedItem: Section;
 
-  @ViewChild('descInput') descInputRef: ElementRef;
-  @ViewChild('timeInput') timeInputRef: ElementRef;
-  @ViewChild('numberInput') numberInputRef: ElementRef;
+  constructor(private shoppingCoursesService: ShoppingCoursesService) {}
 
-  // @Output() sectionAdded = new EventEmitter<Section>();
+  ngOnInit() {
+    this.subscription = this.shoppingCoursesService.startedEditing.subscribe(
+      (index: number) => {
+        this.editedItemIndex = index;
+        this.editMode = true;
+        this.editedItem = this.shoppingCoursesService.getSection(index);
+        this.slForm.setValue({
+          number: this.editedItem.numberOfSection, 
+          desc: this.editedItem.descriptions, 
+          time: this.editedItem.time
+        });
+      }
+    );
+  }
 
-  
-  constructor(private shoppingCoursesService: ShoppingCoursesService ){}
-
-  ngOnInit(){}
-
-
-  onAddItem() {
-    const secDesc = this.descInputRef.nativeElement.value;
-    const secTime = this.timeInputRef.nativeElement.value;
-    const secNumber = this.numberInputRef.nativeElement.value;
-
-    const newSection = new Section(secNumber, secDesc, secTime);
+  onAddItem(form: NgForm) {
+    const value = form.value;
+    const newSection = new Section(value.number, value.desc, value.time);
 
     this.shoppingCoursesService.addtoShoppingCourses(newSection);
-    // this.sectionAdded.emit(newSection);
+
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe(); 
   }
 }

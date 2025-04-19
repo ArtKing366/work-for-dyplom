@@ -35,7 +35,8 @@
       <ul class="list-group">
         <li
           class="list-group-item"
-          *ngFor="let section of selectedCourse.sections"
+          *ngFor="let section of selectedCourse.sections; let i = index" 
+          (click)="onEditItem(i)"
         >
           {{ section.numberOfSection }}. {{ section.descriptions }} - {{ section.time }} min
         </li>

@@ -7,13 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  loadedFeature = 'courses';  
+  // loadedFeature = 'courses';  
 
   
 
-  onNavigate(feature: string){
-    this.loadedFeature = feature;
-  }
+  // onNavigate(feature: string){
+  //   this.loadedFeature = feature;
+  // }
 
 
 }

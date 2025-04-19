@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -52,6 +52,7 @@ import { CourseMakeComponent } from './courses/course-make/course-make.component
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     MatDialogModule, 
     MatButtonModule, 
     MatInputModule,  

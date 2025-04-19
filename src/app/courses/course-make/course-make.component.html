@@ -1,1 +1,100 @@
-<p>course-make works!</p>
+<div class="row">
+  <div class="cl-xs-12">
+    <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-success">Save</button>
+          <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              formControlName="name"
+               placeholder="Enter course name"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imagePath">Image URL</label>
+            <input
+              type="text"
+              id="imagePath"
+              class="form-control"
+              formControlName="imagePath"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              class="form-control"
+              formControlName="description"
+              placeholder="Enter course description"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row" formArrayName="sections">
+        <div
+          class="row"
+          *ngFor="let sectionCtrl of controls; let i = index"
+          [formGroupName]="i"
+        >
+          <div class="col-xs-8">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="desc"
+              placeholder="Description"
+            />
+          </div>
+          <div class="col-xs-2">
+            <input
+              type="number"
+              class="form-control"
+              formControlName="number"
+              placeholder="Number"
+            />
+          </div>
+          <div class="col-xs-2">
+            <input
+              type="number"
+              class="form-control"
+              formControlName="time"
+              placeholder="Time"
+            />
+          </div>
+          <div class="col-xs-2">
+            <button
+              class="btn btn-danger"
+              type="button"
+              (click)="onDeleteSection(i)"
+            >
+              X
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-primary" type="button" (click)="onAddSection()">
+            Add Section
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

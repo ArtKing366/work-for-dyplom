@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Course } from './course.model';
 import { CourseService } from './course.service';
 
 @Component({
@@ -9,13 +8,10 @@ import { CourseService } from './course.service';
   providers: [CourseService],
 })
 export class CoursesComponent {
-  @Input() selectedCourse: Course;
 
-  constructor(private courseService: CourseService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.courseService.courseSelected.subscribe((course: Course) => {
-      this.selectedCourse = course;
-    });
+    
   }
 }

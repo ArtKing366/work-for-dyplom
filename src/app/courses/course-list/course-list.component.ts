@@ -18,6 +18,11 @@ export class CourseListComponent {
   ) {}
 
   ngOnInit() {
+    this.courseService.coursesChanged.subscribe(
+      (courses: Course[]) => {
+        this.courses = courses;
+      }
+    );
     this.courses = this.courseService.getCourses();
   }
 

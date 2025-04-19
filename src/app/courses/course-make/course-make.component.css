@@ -1,0 +1,11 @@
+/* Стили для полей с ошибками */
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+  background-color: #ffe6e6;
+}
+
+/* Стили для меток, связанных с полями с ошибками */
+label.ng-invalid.ng-touched {
+  color: red;
+}
