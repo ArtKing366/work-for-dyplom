@@ -1,20 +1,15 @@
 <div class="div">
   <div class="col md-12">
-  <app-marquee-banner ></app-marquee-banner>
+    <app-marquee-banner></app-marquee-banner>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-12">
     <app-course-list></app-course-list>
   </div>
-  
-  <div class="col-md-7">
-    <!-- <app-course-detail *ngIf="selectedCourse; else infoText" [course]="selectedCourse"></app-course-detail>
-    <ng-template #infoText>
-      <p>Please select a course</p>
-    </ng-template> -->
 
+  <div class="col-md-7">
     <router-outlet></router-outlet>
   </div>
 </div>
