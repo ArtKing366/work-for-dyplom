@@ -23,11 +23,14 @@ import { AboutUsModalComponent } from './about-us/about-us-modal/about-us-modal.
 import { DropdownDirective } from './shared/dropdown.directive';
 import { CourseService } from './courses/course.service';
 import { ShoppingCoursesService } from './shopping-courses/shopping-courses.service';
-import { MarqueeBannerComponent } from './courses/marquee-banner/marquee-banner.component';
+import { MarqueeBannerComponent } from './shared/marquee-banner/marquee-banner.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CourseStartComponent } from './courses/course-start/course-start.component';
 import { CourseMakeComponent } from './courses/course-make/course-make.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading.spinner/loading-spinner.component';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,8 @@ import { HttpClientModule } from '@angular/common/http';
     MarqueeBannerComponent,
     CourseStartComponent,
     CourseMakeComponent,
+    AuthComponent,
+    LoadingSpinnerComponent,
 
     
   ],
@@ -64,7 +69,8 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     provideAnimationsAsync(),
     CourseService,
-    ShoppingCoursesService
+    ShoppingCoursesService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true},
   ],
   bootstrap: [AppComponent]
 })

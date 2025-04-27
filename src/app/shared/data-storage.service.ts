@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Course } from '../courses/course.model';
 import { CourseService } from '../courses/course.service';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { exhaustMap, map, take, tap } from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataStorageService {
-  constructor(private http: HttpClient, private courseService: CourseService) {}
+  constructor(
+    private http: HttpClient,
+    private courseService: CourseService,
+    private authService: AuthService
+  ) {}
 
   storeCourses() {
     const courses = this.courseService.getCourses();
     return this.http
       .put(
-        'https://dyplom-project-2399a-default-rtdb.firebaseio.com/courses.json',
+        'https://dyplom-cc5ef-default-rtdb.firebaseio.com/courses.json',
         courses
       )
       .subscribe((response) => {
@@ -23,10 +27,11 @@ export class DataStorageService {
       });
   }
 
-  fetchCourses(): Observable<Course[]> {
+  fetchCourses() {
     return this.http
       .get<Course[]>(
-        'https://dyplom-project-2399a-default-rtdb.firebaseio.com/courses.json'
+        'https://dyplom-cc5ef-default-rtdb.firebaseio.com/courses.json',
+      
       )
       .pipe(
         map((courses) => {
@@ -41,5 +46,6 @@ export class DataStorageService {
           this.courseService.setCourses(courses);
         })
       );
+    
   }
 }
