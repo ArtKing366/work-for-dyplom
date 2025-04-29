@@ -32,6 +32,11 @@ export class CourseService {
     ),
   ];
 
+  setCourses(courses: Course[]){
+    this.courses = courses;
+    this.coursesChanged.next(this.courses.slice());
+  }
+
   getCourses() {
     return this.courses.slice();
   }

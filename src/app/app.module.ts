@@ -27,6 +27,7 @@ import { MarqueeBannerComponent } from './courses/marquee-banner/marquee-banner.
 import { AppRoutingModule } from './app-routing.module';
 import { CourseStartComponent } from './courses/course-start/course-start.component';
 import { CourseMakeComponent } from './courses/course-make/course-make.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { CourseMakeComponent } from './courses/course-make/course-make.component
     MatButtonModule, 
     MatInputModule,  
     MatFormFieldModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     provideAnimationsAsync(),
