@@ -19,7 +19,7 @@ export class DataStorageService {
     const courses = this.courseService.getCourses();
     return this.http
       .put(
-        'https://dyplom-cc5ef-default-rtdb.firebaseio.com/courses.json',
+        'https://ng-dyplom-work-default-rtdb.firebaseio.com/courses.json',
         courses
       )
       .subscribe((response) => {
@@ -30,7 +30,7 @@ export class DataStorageService {
   fetchCourses() {
     return this.http
       .get<Course[]>(
-        'https://dyplom-cc5ef-default-rtdb.firebaseio.com/courses.json',
+        'https://ng-dyplom-work-default-rtdb.firebaseio.com/courses.json',
       
       )
       .pipe(
