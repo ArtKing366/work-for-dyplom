@@ -20,7 +20,7 @@ export class HeaderComponent {
 
 
   onFetchData(){
-    this.dataStorageService.fetchCourses(); 
+    this.dataStorageService.fetchCourses().subscribe(); 
   }
 
   openProfileModal() {

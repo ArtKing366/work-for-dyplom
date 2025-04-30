@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CourseService } from '../courses/course.service';
 import { Course } from '../courses/course.model';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
@@ -21,18 +21,22 @@ export class DataStorageService {
   }
 
   fetchCourses() {
-    this.http.get<Course[]>(
-      'https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/course.json'
-    ).pipe(map(courses => {
-      return courses.map(course => {
-        return {
-          ...course,
-          sections: course.sections ? course.sections : []
-        };
-      });
-    }))
-    .subscribe(courses => {
-      this.courseService.setCourses(courses);
-    })
+    return this.http
+      .get<Course[]>(
+        'https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/course.json'
+      )
+      .pipe(
+        map((courses) => {
+          return courses.map((course) => {
+            return {
+              ...course,
+              sections: course.sections ? course.sections : [],
+            };
+          });
+        }),
+        tap((courses) => {
+          this.courseService.setCourses(courses);
+        })
+      );
   }
 }
