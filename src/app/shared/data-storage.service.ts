@@ -26,26 +26,22 @@ export class DataStorageService {
   }
 
   fetchCourses() {
-    return this.authService.user.pipe(
-      take(1),
-      exhaustMap((user) => {
-        return this.http.get<Course[]>(
-          'https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/course.json',{
-            params: new HttpParams().set('auth', user.token)
-          }
-        );
-      }),
-      map((courses) => {
-        return courses.map((course) => {
-          return {
-            ...course,
-            sections: course.sections ? course.sections : [],
-          };
-        });
-      }),
-      tap((courses) => {
-        this.courseService.setCourses(courses);
-      })
-    );
+    return this.http
+      .get<Course[]>(
+        'https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/course.json'
+      )
+      .pipe(
+        map((courses) => {
+          return courses.map((course) => {
+            return {
+              ...course,
+              sections: course.sections ? course.sections : [],
+            };
+          });
+        }),
+        tap((courses) => {
+          this.courseService.setCourses(courses);
+        })
+      );
   }
 }

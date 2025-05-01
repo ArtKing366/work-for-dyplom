@@ -27,9 +27,10 @@ import { MarqueeBannerComponent } from './shared/marquee-banner/marquee-banner.c
 import { AppRoutingModule } from './app-routing.module';
 import { CourseStartComponent } from './courses/course-start/course-start.component';
 import { CourseMakeComponent } from './courses/course-make/course-make.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthIntercepotrService } from './auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -50,26 +51,29 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     CourseStartComponent,
     CourseMakeComponent,
     AuthComponent,
-    LoadingSpinnerComponent
-
-    
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule, 
-    MatButtonModule, 
-    MatInputModule,  
+    MatDialogModule,
+    MatButtonModule,
+    MatInputModule,
     MatFormFieldModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     provideAnimationsAsync(),
     CourseService,
-    ShoppingCoursesService
+    ShoppingCoursesService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthIntercepotrService,
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

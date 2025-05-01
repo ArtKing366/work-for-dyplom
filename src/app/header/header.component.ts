@@ -39,6 +39,10 @@ export class HeaderComponent implements OnInit, OnDestroy{
     this.dataStorageService.fetchCourses().subscribe();
   }
 
+  onLogout(){
+    this.authService.logout();
+  }
+
   openProfileModal() {
     this.dialog.open(MyProfileComponent, {
       width: '500px',
@@ -49,4 +53,6 @@ export class HeaderComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this.userSub.unsubscribe();
   }
+
+
 }
