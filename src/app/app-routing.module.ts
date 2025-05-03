@@ -9,10 +9,13 @@ import { CourseDetailComponent } from "./courses/course-detail/course-detail.com
 import { CourseMakeComponent } from "./courses/course-make/course-make.component";
 import { CourseResolverService } from "./courses/course-resolver.service";
 import { AuthComponent } from "./auth/auth.component";
+import { AuthGuard } from "./auth/auth.guard";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/courses', pathMatch: 'full' },
-  { path: 'courses', component: CoursesComponent, children: [
+  { path: 'courses', component: CoursesComponent,
+    canActivate:[ AuthGuard],
+    children: [
     { path: '', component: CourseStartComponent },
     { path: 'new', component: CourseMakeComponent },
     { path: ':id', component: CourseDetailComponent, resolve:[CourseResolverService]  },
