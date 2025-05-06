@@ -10,18 +10,17 @@ import { AboutUsModalComponent } from './about-us-modal/about-us-modal.component
 export class AboutUsComponent {
 
   aboutUsInfo = {
-    title: 'About Us',
-    description: 'We are a company focused on delivering quality educational resources to learners worldwide. Our mission is to make learning accessible and affordable for everyone.'
+    title: '',
+    description: ''
   };
 
   constructor(public dialog: MatDialog) { }
 
-  // Открытие модального окна
-  openAboutUsModal() {
-    this.dialog.open(AboutUsModalComponent, {
-      width: '500px',
-      height: '300px',
-      data: this.aboutUsInfo
-    });
-  }
+  // openAboutUsModal() {
+  //   this.dialog.open(AboutUsModalComponent, {
+  //     width: '500px',
+  //     height: '300px',
+  //     data: this.aboutUsInfo
+  //   });
+  // }
 }

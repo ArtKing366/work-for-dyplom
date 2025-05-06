@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatDialogRef } from '@angular/material/dialog'; // Импортируем MatDialogRef
-
+import { MatDialogRef } from '@angular/material/dialog'; 
 @Component({
   selector: 'app-about-us-modal',
   templateUrl: './about-us-modal.component.html',
@@ -10,8 +9,8 @@ import { MatDialogRef } from '@angular/material/dialog'; // Импортируе
 export class AboutUsModalComponent {
 
   constructor(
-    public dialogRef: MatDialogRef<AboutUsModalComponent>,  // Добавляем MatDialogRef в конструктор
-    @Inject(MAT_DIALOG_DATA) public data: any  // Получаем данные из диалога
+    public dialogRef: MatDialogRef<AboutUsModalComponent>,  
+    @Inject(MAT_DIALOG_DATA) public data: any  
   ) { }
 
 }
