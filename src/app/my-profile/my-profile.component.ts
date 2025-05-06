@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';  // Импортируем MatDialog
-import { MyProfileEditComponent } from './my-profile-edit/my-profile-edit.component';  // Импортируем компонент редактирования
+import { MatDialog } from '@angular/material/dialog';  
+import { MyProfileEditComponent } from './my-profile-edit/my-profile-edit.component';  
 
 @Component({
   selector: 'app-my-profile',
@@ -20,14 +20,12 @@ export class MyProfileComponent {
 
   constructor(public dialog: MatDialog) { }
 
-  // Открытие модального окна для редактирования профиля
   openEditProfile() {
     const dialogRef = this.dialog.open(MyProfileEditComponent, {
       width: '400px',
-      data: { ...this.profile }  // Передаем данные профиля в модальное окно
+      data: { ...this.profile } 
     });
 
-    // Получаем данные из диалога после его закрытия
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.profile = result;

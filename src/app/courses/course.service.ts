@@ -61,4 +61,9 @@ export class CourseService {
     this.courses[index] = newCourse;
     this.coursesChanged.next(this.courses.slice());
   }
+
+  deleteCourse(index:number){
+    this.courses.splice(index, 1);
+    this.coursesChanged.next(this.courses.slice());
+  }
 }
