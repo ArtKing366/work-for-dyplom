@@ -1,10 +1,30 @@
 <div class="profile-container">
   <div class="profile-header">
+    <img [src]="'assets/img/' + profile.avatar" 
+         alt="Profile Avatar" 
+         class="profile-avatar">
     <h2>{{ profile.firstName }} {{ profile.lastName }}</h2>
-    <p>Nickname: {{ profile.nickname }}</p>
-    <p>Age: {{ profile.age }}</p>
-    <p>Email: {{ profile.email }}</p>
-    <p>About me: {{ profile.bio }}</p>
+    <p class="nickname">&#64;{{ profile.nickname }}</p>
   </div>
-  <button class="btn btn-primary" (click)="openEditProfile()">Edit Profile</button>
+
+  <div class="profile-details">
+    <div class="profile-detail">
+      <label>Age</label>
+      <span>{{ profile.age }}</span>
+    </div>
+    
+    <div class="profile-detail">
+      <label>Email</label>
+      <span>{{ profile.email }}</span>
+    </div>
+  </div>
+
+  <div class="profile-bio">
+    <label>About Me</label>
+    <p>{{ profile.bio || 'No bio yet' }}</p>
+  </div>
+
+  <div class="profile-actions">
+    <button class="btn btn-primary" (click)="openEditProfile()">Edit Profile</button>
+  </div>
 </div>

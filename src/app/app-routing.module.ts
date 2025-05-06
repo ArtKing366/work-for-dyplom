@@ -10,30 +10,34 @@ import { CourseMakeComponent } from "./courses/course-make/course-make.component
 import { CourseResolverService } from "./courses/course-resolver.service";
 import { AuthComponent } from "./auth/auth.component";
 import { AuthGuard } from "./auth/auth.guard";
+import { MyProfileEditComponent } from "./my-profile/my-profile-edit/my-profile-edit.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/courses', pathMatch: 'full' },
   { path: 'courses', component: CoursesComponent,
-    canActivate:[ AuthGuard],
+    canActivate: [AuthGuard],
     children: [
-    { path: '', component: CourseStartComponent },
-    { path: 'new', component: CourseMakeComponent },
-    { path: ':id', component: CourseDetailComponent, resolve:[CourseResolverService]  },
-    { path: ':id/edit', component: CourseMakeComponent, resolve:[CourseResolverService]   },
-  ]},
-  { path: 'my-courses', component: ShoppingCoursesComponent },
+      { path: '', component: CourseStartComponent },
+      { path: 'new', component: CourseMakeComponent },
+      { path: ':id', component: CourseDetailComponent, resolve: [CourseResolverService] },
+      { path: ':id/edit', component: CourseMakeComponent, resolve: [CourseResolverService] },
+    ]
+  },
+  { path: 'my-courses', component: ShoppingCoursesComponent, canActivate: [AuthGuard] },
   { path: 'about-us', component: AboutUsComponent },
-  { path: 'my-profile', component: MyProfileComponent },
+  { 
+    path: 'my-profile', 
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', component: MyProfileComponent },
+      { path: 'edit', component: MyProfileEditComponent }
+    ]
+  },
   { path: 'auth', component: AuthComponent }
 ];
 
 @NgModule({
-  imports:[RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
-
-export class AppRoutingModule{
-
-
-}
-
+export class AppRoutingModule {}

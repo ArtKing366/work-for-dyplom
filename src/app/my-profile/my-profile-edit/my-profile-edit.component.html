@@ -1,27 +1,54 @@
-<h2 mat-dialog-title>Edit Profile</h2>
-<div mat-dialog-content>
-  <form>
-    <label for="firstName">First Name</label>
-    <input type="text" [(ngModel)]="profile.firstName" name="firstName" id="firstName" class="form-control">
+<div class="profile-edit-container">
+  <h2>Edit Profile</h2>
+  
+  <div class="avatar-selection">
+    <h3>Choose Avatar</h3>
+    <div class="scroll-container">
+      <div class="avatar-options">
+        <div *ngFor="let avatar of avatars" 
+             class="avatar-option" 
+             [class.selected]="profile.avatar === avatar"
+             (click)="selectAvatar(avatar)">
+          <img [src]="'assets/img/' + avatar" [alt]="'Avatar ' + avatar">
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <label for="lastName">Last Name</label>
-    <input type="text" [(ngModel)]="profile.lastName" name="lastName" id="lastName" class="form-control">
+  <form (ngSubmit)="onSave()" class="profile-form">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" [(ngModel)]="profile.firstName" name="firstName">
+    </div>
 
-    <label for="nickname">Nickname</label>
-    <input type="text" [(ngModel)]="profile.nickname" name="nickname" id="nickname" class="form-control">
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" [(ngModel)]="profile.lastName" name="lastName">
+    </div>
 
-    <label for="age">Age</label>
-    <input type="number" [(ngModel)]="profile.age" name="age" id="age" class="form-control">
+    <div class="form-group">
+      <label for="nickname">Nickname</label>
+      <input type="text" id="nickname" [(ngModel)]="profile.nickname" name="nickname">
+    </div>
 
-    <label for="email">Email</label>
-    <input type="email" [(ngModel)]="profile.email" name="email" id="email" class="form-control">
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input type="number" id="age" [(ngModel)]="profile.age" name="age">
+    </div>
 
-    <label for="bio">Bio</label>
-    <textarea [(ngModel)]="profile.bio" name="bio" id="bio" class="form-control"></textarea>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" [(ngModel)]="profile.email" name="email">
+    </div>
+
+    <div class="form-group">
+      <label for="bio">Bio</label>
+      <textarea id="bio" [(ngModel)]="profile.bio" name="bio" rows="4"></textarea>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-outline" (click)="onCancel()">Cancel</button>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
   </form>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onClear()">Clear</button>
-  <button mat-button (click)="onSkip()">Skip</button>
-  <button mat-button color="primary" (click)="onSave()">Save</button>
 </div>

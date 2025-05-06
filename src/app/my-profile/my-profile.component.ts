@@ -1,35 +1,40 @@
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';  
-import { MyProfileEditComponent } from './my-profile-edit/my-profile-edit.component';  
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.component.html',
   styleUrls: ['./my-profile.component.css']
 })
-export class MyProfileComponent {
-
+export class MyProfileComponent implements OnInit {
   profile = {
     firstName: 'John',
     lastName: 'Doe',
     nickname: 'johnny',
     age: 30,
     email: 'john.doe@example.com',
-    bio: 'Software Developer at TechCorp'
+    bio: 'Software Developer at TechCorp',
+    avatar: 'avatar-image.jpg'
   };
 
-  constructor(public dialog: MatDialog) { }
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    this.loadProfile();
+  }
+
+  loadProfile() {
+    const savedProfile = localStorage.getItem('userProfile');
+    if (savedProfile) {
+      this.profile = JSON.parse(savedProfile);
+    }
+  }
 
   openEditProfile() {
-    const dialogRef = this.dialog.open(MyProfileEditComponent, {
-      width: '400px',
-      data: { ...this.profile } 
-    });
+    this.router.navigate(['/my-profile/edit']);
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.profile = result;
-      }
-    });
+  goBack() {
+    this.router.navigate(['/courses']); 
   }
 }
