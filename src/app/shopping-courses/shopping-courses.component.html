@@ -1,59 +1,58 @@
-<div class="row">
-  <div class="col-xs-10">
-    <div class="list-group">
-      <a
-        class="list-group-item clearfix"
-        *ngFor="let course of courses"
-        (click)="onSelectCourse(course)"
-        style="cursor: pointer;"
-      >
-        <div class="pull-left">
-          <h4 class="list-group-item-heading">{{ course.name }}</h4>
-          <p class="list-group-item-text">{{ course.description }}</p>
+<div class="shopping-courses-container">
+  <div *ngIf="courses.length === 0" class="empty-state">
+    <div class="empty-icon">
+      <i class="fas fa-book-open"></i>
+    </div>
+    <h3>No Courses Available</h3>
+    <p>You haven't added any courses yet. Start by adding some courses to your list.</p>
+    <button class="btn btn-primary" routerLink="/courses">
+      <i class="fas fa-plus"></i> Browse Courses
+    </button>
+  </div>
+
+  <div *ngIf="courses.length > 0" class="course-content">
+    <div class="course-list-container">
+      <h3>My Courses</h3>
+      <div class="course-list">
+        <div class="course-item"
+          *ngFor="let course of courses"
+          [class.selected]="selectedCourse === course"
+          (click)="onSelectCourse(course)">
+          <div class="course-info">
+            <h4 class="course-name">{{ course.name }}</h4>
+            <p class="course-description">{{ course.description }}</p>
+          </div>
+          <div class="course-image">
+            <img [src]="course.imagePath" alt="{{ course.name }}" />
+          </div>
         </div>
-        <span class="pull-right">
-          <img
-            [src]="course.imagePath"
-            alt="{{ course.name }}"
-            class="img-responsive"
-            style="max-height: 50px"
-          />
-        </span>
-      </a>
+      </div>
     </div>
 
-    <div *ngIf="selectedCourse">
-      <h3>{{ selectedCourse.name }}</h3>
-      <p>{{ selectedCourse.description }}</p>
-      <img
-        [src]="selectedCourse.imagePath"
-        alt="{{ selectedCourse.name }}"
-        class="img-responsive"
-        style="max-height: 200px"
-      />
-      <h4>Sections:</h4>
-      <ul class="list-group">
-        <li
-          class="list-group-item"
-          *ngFor="let section of selectedCourse.sections; let i = index" 
-          (click)="onEditItem(i)"
-        >
-          {{ section.numberOfSection }}. {{ section.descriptions }} - {{ section.time }} min
-        </li>
-      </ul>
+    <div class="selected-course-container" *ngIf="selectedCourse">
+      <div class="selected-course-header">
+        <h3>{{ selectedCourse.name }}</h3>
+        <div class="course-image-large">
+          <img [src]="selectedCourse.imagePath" alt="{{ selectedCourse.name }}" />
+        </div>
+      </div>
+      
+      <p class="selected-course-description">{{ selectedCourse.description }}</p>
+      
+      <div class="sections-container">
+        <h4>Course Sections</h4>
+        <ul class="section-list">
+          <li class="section-item"
+            *ngFor="let section of selectedCourse.sections; let i = index"
+            (click)="onEditItem(i)">
+            <span class="section-number">{{ section.numberOfSection }}.</span>
+            <span class="section-description">{{ section.descriptions }}</span>
+            <span class="section-time">{{ section.time }} min</span>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <!-- <hr> -->
-    
     <app-shopping-edit></app-shopping-edit>
-    
-    <!-- <hr> -->
-    
-    <!-- <h3 class="text-primary">Course Sections</h3>
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let section of sections">
-        {{ section.numberOfSection }}. {{ section.descriptions }} - {{ section.time }} min
-      </li>
-    </ul> -->
   </div>
 </div>
