@@ -1,18 +1,19 @@
-
 <div class="row">
   <div class="col-xs-12">
-    <div class="btn btn-success" (click)="onNewCourse()">New Course</div>
+    <button class="btn btn-primary" (click)="onNewCourse()">
+      <i class="fas fa-plus"></i> New course
+    </button>
   </div>
 </div>
 <hr>
 <div class="row">
-  <div class="col-xs-12">
-    <app-course-item *ngFor="let courseEL of courses; let i = index"
-    [course]="courseEL"
-    [index]="i"
-    ></app-course-item>
+  <div class="col-xs-12 col-md-8">
+    <div class="courses-list">
+      <app-course-item 
+        *ngFor="let courseEL of courses; let i = index"
+        [course]="courseEL"
+        [index]="i">
+      </app-course-item>
+    </div>
   </div>
 </div>
-
-
-
