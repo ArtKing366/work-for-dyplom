@@ -1,41 +1,51 @@
-<div class="div">
-  <div class="col-xs-12" >
-    <img [src]="course.imagePath" alt="{{ course.name }}" class="img-responsive" style="max-height: 300px;" />
-  </div>
-</div>
+<div class="course-detail-container">
 
-<div class="row">
-  <div class="col-xs-12">
-    <h1>{{ course.name }}</h1>
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <img [src]="course.imagePath" alt="{{ course.name }}" class="img-responsive course-image" />
+    </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <div class="btn-group " appDropdown>
-      <button type="button" class="btn btn-primary dropdown-toggle">Manage course<span class="caret"></span></button>
-      <ul class="dropdown-menu">
-        <li><a (click)="onAddToMyCourses()" style="cursor: pointer;">Add to my courses</a></li>
-        <li><a  style="cursor: pointer;" (click)="onDeleteCourse()">Not interested for me</a></li>
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <h1 class="course-title">{{ course.name }}</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <div class="btn-group" appDropdown>
+        <button type="button" class="btn btn-primary dropdown-toggle">
+          Manage course <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a (click)="onAddToMyCourses()" style="cursor: pointer;">Add to my courses</a>
+          </li>
+          <li>
+            <a (click)="onDeleteCourse()" style="cursor: pointer;">Not interested for me</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row course-description">
+    <div class="col-xs-12">
+      <p>{{ course.description }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <ul class="list-group course-section-list">
+        <li class="list-group-item" *ngFor="let section of course.sections">
+          <strong>{{ section.numberOfSection }}.</strong>
+          {{ section.descriptions }} –
+          <span class="text-muted">{{ section.time }} {{ section.typeOfTime }}</span>
+        </li>
       </ul>
     </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-xs-12">
-    {{ course.description }}
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <ul class="list-group">
-        <li class="list-group-item" *ngFor="let section of course.sections">
-          {{ section.numberOfSection }}. 
-          {{ section.descriptions }} -
-          {{ section.time }} {{ section.typeOfTime }}
-        </li>
-    </ul>
-  </div>
 </div>

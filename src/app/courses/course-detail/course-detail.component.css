@@ -1,0 +1,76 @@
+.course-detail-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 15px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.course-image {
+  max-height: 300px;
+  width: auto;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+.course-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 20px 0;
+}
+
+.course-description {
+  font-size: 16px;
+  margin: 25px 0;
+  color: #444;
+}
+
+.course-section-list {
+  margin-top: 20px;
+}
+
+.course-section-list .list-group-item {
+  font-size: 16px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-left: 4px solid #3498db;
+  margin-bottom: 10px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.course-section-list .list-group-item:hover {
+  background-color: #f0f8ff;
+}
+
+.btn-group .btn-primary {
+  background-color: #3498db;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.btn-group .btn-primary:hover {
+  background-color: #2980b9;
+}
+
+.dropdown-menu {
+  background-color: #f4f4f4;
+  border-radius: 6px;
+  padding: 0;
+}
+
+.dropdown-menu > li > a {
+  color: #2c3e50;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu > li > a:hover {
+  background-color: #3498db;
+  color: #fff;
+}
