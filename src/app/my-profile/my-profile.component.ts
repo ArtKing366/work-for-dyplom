@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataStorageService } from '../shared/data-storage.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -17,17 +18,18 @@ export class MyProfileComponent implements OnInit {
     avatar: 'avatar-image.jpg'
   };
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
     this.loadProfile();
   }
 
   loadProfile() {
-    const savedProfile = localStorage.getItem('userProfile');
-    if (savedProfile) {
-      this.profile = JSON.parse(savedProfile);
-    }
+    this.dataStorageService.fetchProfile((profile) => {
+      if (profile) {
+        this.profile = profile;
+      }
+    });
   }
 
   openEditProfile() {
@@ -35,6 +37,6 @@ export class MyProfileComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/courses']); 
+    this.router.navigate(['/courses']);
   }
 }

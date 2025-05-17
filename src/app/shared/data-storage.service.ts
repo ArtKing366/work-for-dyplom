@@ -4,12 +4,15 @@ import { CourseService } from '../courses/course.service';
 import { Course } from '../courses/course.model';
 import { exhaustMap, map, take, tap } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
+import { ShoppingCoursesService } from '../shopping-courses/shopping-courses.service';
+import { User } from '../auth/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
   constructor(
     private http: HttpClient,
     private courseService: CourseService,
+    private shoppingCoursesService: ShoppingCoursesService,
     private authService: AuthService
   ) {}
 
@@ -43,5 +46,60 @@ export class DataStorageService {
           this.courseService.setCourses(courses);
         })
       );
+  }
+
+  // --- NEW: My Courses (ShoppingCourses) per user ---
+  storeMyCourses() {
+    this.authService.user.pipe(take(1)).subscribe((user: User) => {
+      if (!user) return;
+      const myCourses = this.shoppingCoursesService.getCourses();
+      this.http
+        .put(
+          `https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/my-courses/${user.id}.json?auth=${user.token}`,
+          myCourses
+        )
+        .subscribe();
+    });
+  }
+
+  fetchMyCourses() {
+    this.authService.user.pipe(take(1)).subscribe((user: User) => {
+      if (!user) return;
+      this.http
+        .get<any>(
+          `https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/my-courses/${user.id}.json?auth=${user.token}`
+        )
+        .pipe(
+          map((courses) => (courses ? courses : [])),
+          tap((courses) => {
+            this.shoppingCoursesService.setCourses(courses);
+          })
+        )
+        .subscribe();
+    });
+  }
+
+  // --- NEW: Profile per user ---
+  storeProfile(profile: any) {
+    this.authService.user.pipe(take(1)).subscribe((user: User) => {
+      if (!user) return;
+      this.http
+        .put(
+          `https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/profiles/${user.id}.json?auth=${user.token}`,
+          profile
+        )
+        .subscribe();
+    });
+  }
+
+  fetchProfile(callback: (profile: any) => void) {
+    this.authService.user.pipe(take(1)).subscribe((user: User) => {
+      if (!user) return callback(null);
+      this.http
+        .get<any>(
+          `https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/profiles/${user.id}.json?auth=${user.token}`
+        )
+        .subscribe((profile) => callback(profile));
+    });
   }
 }

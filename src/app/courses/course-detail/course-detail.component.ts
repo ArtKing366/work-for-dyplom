@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Course } from '../course.model';
 import { CourseService } from '../course.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { DataStorageService } from '../../shared/data-storage.service'; 
 
 @Component({
   selector: 'app-course-detail',
@@ -12,10 +13,11 @@ export class CourseDetailComponent {
   course: Course;
   id: number;
 
-
-  constructor(private courseService: CourseService,
+  constructor(
+    private courseService: CourseService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dataStorageService: DataStorageService
   ) {}
   
   ngOnInit(){
@@ -29,11 +31,10 @@ export class CourseDetailComponent {
 
   onAddToMyCourses() {
     this.courseService.addCourseToMyCourses(this.course); 
+    this.dataStorageService.storeMyCourses();
   }
 
-  onCnacelCourses(){
-
-  }
+  onCnacelCourses(){}
 
   onDeleteCourse(){
     this.courseService.deleteCourse(this.id);

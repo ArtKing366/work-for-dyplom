@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Course } from '../courses/course.model';
 import { Section } from '../shared/section.model';
 import { Subject } from 'rxjs';
@@ -7,16 +7,25 @@ import { Subject } from 'rxjs';
 export class ShoppingCoursesService {
   private courses: Course[] = [];
   private sections: Section[] = [];
-  sectionChanged = new Subject<Section[]>(); 
-  private selectedCourse: Course | null = null; 
+  sectionChanged = new Subject<Section[]>();
+  private selectedCourse: Course | null = null;
   startedEditing = new Subject<number>();
 
   getCourses() {
     return this.courses.slice();
   }
 
+  setCourses(courses: Course[]) {
+    this.courses = courses || [];
+    this.sections = [];
+    for (const course of this.courses) {
+      this.sections.push(...(course.sections || []));
+    }
+    this.sectionChanged.next(this.sections.slice());
+  }
+
   getSection(index: number) {
-    return this.sections[index]
+    return this.sections[index];
   }
 
   getShoppingCourses() {
@@ -25,9 +34,8 @@ export class ShoppingCoursesService {
 
   addCourse(course: Course) {
     this.courses.push(course);
-    this.sections.push(...course.sections); 
+    this.sections.push(...course.sections);
     this.sectionChanged.next(this.sections.slice());
-    console.log('Courses after adding:', this.courses);
   }
 
   addtoShoppingCourses(section: Section) {
@@ -39,6 +47,6 @@ export class ShoppingCoursesService {
   }
 
   getSelectedCourse() {
-    return this.selectedCourse; 
+    return this.selectedCourse;
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataStorageService } from '../../shared/data-storage.service';
 
 @Component({
   selector: 'app-my-profile-edit',
@@ -19,7 +20,7 @@ export class MyProfileEditComponent implements OnInit {
 
   avatars = this.generateAvatarPaths();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
     this.loadProfile();
@@ -34,10 +35,11 @@ export class MyProfileEditComponent implements OnInit {
   }
 
   loadProfile() {
-    const savedProfile = localStorage.getItem('userProfile');
-    if (savedProfile) {
-      this.profile = JSON.parse(savedProfile);
-    }
+    this.dataStorageService.fetchProfile((profile) => {
+      if (profile) {
+        this.profile = profile;
+      }
+    });
   }
 
   selectAvatar(avatar: string) {
@@ -46,9 +48,9 @@ export class MyProfileEditComponent implements OnInit {
 
   onSave() {
     if (!this.profile.avatar) {
-      this.profile.avatar = 'avatar1.jpg'; 
+      this.profile.avatar = 'avatar1.jpg';
     }
-    localStorage.setItem('userProfile', JSON.stringify(this.profile));
+    this.dataStorageService.storeProfile(this.profile);
     this.router.navigate(['/my-profile']);
   }
 
