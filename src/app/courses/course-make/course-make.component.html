@@ -61,37 +61,44 @@
           *ngFor="let sectionCtrl of controls; let i = index"
           [formGroupName]="i"
         >
-          <div class="section-input">
-            <input
-              type="text"
-              class="form-input"
-              formControlName="desc"
-              placeholder="Section title"
-            />
-          </div>
-          
-          <div class="section-number">
-            <input
-              type="number"
-              class="form-input"
-              formControlName="number"
-              placeholder="No."
-            />
-          </div>
-          
-          <div class="section-time">
+          <input
+            type="text"
+            class="section-title"
+            formControlName="descriptions"
+            placeholder="Section title"
+          />
+
+          <input
+            type="number"
+            class="section-number"
+            formControlName="number"
+            placeholder="No."
+          />
+
+          <div class="section-duration">
             <input
               type="number"
-              class="form-input"
               formControlName="time"
               placeholder="Duration"
             />
-            <span class="time-label">min</span>
+            <span>min</span>
           </div>
-          
+
+          <div class="file-upload">
+            <label class="file-upload-btn">
+              <i class="fas fa-paperclip"></i>
+              <span>{{ sectionFiles[i]?.name || 'Attach file' }}</span>
+              <input
+                type="file"
+                (change)="onSectionFileChange($event, i)"
+                accept="*"
+              />
+            </label>
+          </div>
+
           <button
             type="button"
-            class="btn btn-remove"
+            class="delete-btn"
             (click)="onDeleteSection(i)"
           >
             <i class="fas fa-trash"></i>

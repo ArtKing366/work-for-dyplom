@@ -1,14 +1,15 @@
 .course-edit-form {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 25px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .action-buttons {
   display: flex;
+  justify-content: flex-end;
   gap: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .btn {
@@ -21,6 +22,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  font-size: 15px;
 }
 
 .btn-success {
@@ -39,18 +41,15 @@
   color: white;
 }
 
-.btn-remove {
-  background-color: transparent;
-  color: #dc3545;
-  padding: 8px;
-}
-
 .form-section {
-  margin-bottom: 30px;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
 }
 
 .form-field {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 label {
@@ -65,9 +64,8 @@ label {
   padding: 12px 15px;
   border: 2px solid #ddd;
   border-radius: 5px;
-  font-size: 16px;
-  transition: border-color 0.3s;
-  background-color: white;
+  font-size: 15px;
+  transition: all 0.3s;
 }
 
 .form-input:focus, .form-textarea:focus {
@@ -82,7 +80,9 @@ label {
 }
 
 .sections-container {
-  margin-top: 30px;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .sections-header {
@@ -95,53 +95,111 @@ label {
 .sections-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
 }
 
 .section-item {
-  display: grid;
-  grid-template-columns: 1fr 80px 120px 40px;
-  gap: 15px;
+  display: flex;
   align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-.section-time {
-  position: relative;
+.section-title {
+  flex: 2;
+  padding: 10px 12px;
+  border: 2px solid #eee;
+  border-radius: 5px;
+  font-size: 15px;
 }
 
-.time-label {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #6c757d;
+.section-number {
+  width: 70px;
+  padding: 10px;
+  border: 2px solid #eee;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.section-duration {
+  display: flex;
+  align-items: center;
+  width: 130px;
+}
+
+.section-duration input {
+  width: 80px;
+  padding: 10px;
+  border: 2px solid #eee;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.file-upload {
+  flex: 1;
+  min-width: 180px;
+}
+
+.file-upload-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  background: #f5f5f5;
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
   font-size: 14px;
+  color: #555;
+}
+
+.file-upload-btn:hover {
+  background: #ebebeb;
+  border-color: #aaa;
+}
+
+.file-upload input {
+  display: none;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #dc3545;
+  cursor: pointer;
+  padding: 8px 10px;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.delete-btn:hover {
+  color: #c82333;
+  transform: scale(1.1);
 }
 
 .empty-sections {
+  padding: 25px;
   text-align: center;
-  color: #6c757d;
-  padding: 20px;
-  border: 1px dashed #ddd;
-  border-radius: 5px;
-}
-
-input.ng-invalid.ng-touched,
-textarea.ng-invalid.ng-touched {
-  border-color: #dc3545 !important;
-  background-color: #fff5f5 !important;
-}
-
-label.ng-invalid.ng-touched {
-  color: #dc3545;
+  color: #666;
+  background: white;
+  border-radius: 8px;
+  border: 2px dashed #ddd;
 }
 
 @media (max-width: 768px) {
   .section-item {
-    grid-template-columns: 1fr;
+    flex-wrap: wrap;
   }
   
-  .action-buttons {
-    flex-direction: column;
+  .section-title,
+  .section-number,
+  .section-duration,
+  .file-upload {
+    flex: 1 1 100%;
+    margin-bottom: 10px;
   }
 }

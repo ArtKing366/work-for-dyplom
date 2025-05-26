@@ -48,6 +48,9 @@
             <span class="section-number">{{ section.numberOfSection }}.</span>
             <span class="section-description">{{ section.descriptions }}</span>
             <span class="section-time">{{ section.time }} min</span>
+            <button *ngIf="section.fileData" class="btn btn-sm btn-outline" (click)="downloadSectionFile(section, $event)">
+              <i class="fas fa-download"></i> Downlowad file
+            </button>
           </li>
         </ul>
       </div>

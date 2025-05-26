@@ -13,6 +13,7 @@ export class CourseMakeComponent {
   id: number;
   editMode = false;
   courseForm: FormGroup;
+  sectionFiles: File[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -32,23 +33,48 @@ export class CourseMakeComponent {
     return (<FormArray>this.courseForm.get('sections')).controls;
   }
 
-  onSubmit() {
-  
+  onSectionFileChange(event: Event, index: number) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.sectionFiles[index] = input.files[0];
+    }
+  }
 
-    if (this.editMode) {
-      this.courseService.updateCourse(this.id, this.courseForm.value);
-    }else {
-      this.courseService.addCourse(this.courseForm.value);
+  async onSubmit() {
+    const formValue = this.courseForm.value;
+
+    // Преобразуем секции
+    for (let i = 0; i < formValue.sections.length; i++) {
+      if (this.sectionFiles[i]) {
+        formValue.sections[i].fileName = this.sectionFiles[i].name;
+        formValue.sections[i].fileData = await this.fileToBase64(this.sectionFiles[i]);
+      }
+      // Исправление: копируем number -> numberOfSection
+      formValue.sections[i].numberOfSection = formValue.sections[i].number;
     }
 
+    if (this.editMode) {
+      this.courseService.updateCourse(this.id, formValue);
+    } else {
+      this.courseService.addCourse(formValue);
+    }
     this.onCancel();
+  }
+
+  fileToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+      reader.readAsDataURL(file);
+    });
   }
 
   onAddSection() {
     (<FormArray>this.courseForm.get('sections')).push(
       new FormGroup({
         number: new FormControl(null, Validators.required),
-        desc: new FormControl(null, Validators.required),
+        descriptions: new FormControl(null, Validators.required), // <-- исправлено
         time: new FormControl(null, Validators.required),
       })
     );
@@ -78,7 +104,7 @@ export class CourseMakeComponent {
                 section.numberOfSection,
                 Validators.required
               ),
-              desc: new FormControl(section.descriptions, Validators.required),
+              descriptions: new FormControl(section.descriptions, Validators.required), // <-- исправлено
               time: new FormControl(section.time, Validators.required),
             })
           );

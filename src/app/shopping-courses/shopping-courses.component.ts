@@ -50,4 +50,12 @@ export class ShoppingCoursesComponent implements OnInit, OnDestroy {
     this.shoppingCoursesService.addCourse(course);
     this.dataStorageService.storeMyCourses();
   }
+
+  downloadSectionFile(section: any, event: Event) {
+    event.stopPropagation();
+    const link = document.createElement('a');
+    link.href = section.fileData;
+    link.download = section.fileName || 'file';
+    link.click();
+  }
 }
