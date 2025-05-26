@@ -1,100 +1,103 @@
-<div class="row">
-  <div class="cl-xs-12">
-    <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
-      <div class="row">
-        <div class="col-xs-12">
-          <button type="submit" class="btn btn-success">Save</button>
-          <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
-        </div>
+<div class="course-edit-form">
+  <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+    <div class="action-buttons">
+      <button type="submit" class="btn btn-success">
+        <i class="fas fa-save"></i> Save
+      </button>
+      <button type="button" class="btn btn-cancel" (click)="onCancel()">
+        <i class="fas fa-times"></i> Cancel
+      </button>
+    </div>
+
+    <div class="form-section">
+      <div class="form-field">
+        <label for="name">Course Title</label>
+        <input
+          type="text"
+          id="name"
+          class="form-input"
+          formControlName="name"
+          placeholder="Enter course title"
+        />
       </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              class="form-control"
-              formControlName="name"
-               placeholder="Enter course name"
-            />
-          </div>
-        </div>
+
+      <div class="form-field">
+        <label for="imagePath">Image URL</label>
+        <input
+          type="text"
+          id="imagePath"
+          class="form-input"
+          formControlName="imagePath"
+          placeholder="https://example.com/image.jpg"
+        />
       </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label for="imagePath">Image URL</label>
-            <input
-              type="text"
-              id="imagePath"
-              class="form-control"
-              formControlName="imagePath"
-            />
-          </div>
-        </div>
+
+      <div class="form-field">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          class="form-textarea"
+          formControlName="description"
+          placeholder="Detailed course description..."
+        ></textarea>
       </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <label for="description">Description</label>
-            <textarea
-              id="description"
-              class="form-control"
-              formControlName="description"
-              placeholder="Enter course description"
-            ></textarea>
-          </div>
-        </div>
+    </div>
+
+    <div class="sections-container">
+      <div class="sections-header">
+        <h3>Course Sections</h3>
+        <button type="button" class="btn btn-add" (click)="onAddSection()">
+          <i class="fas fa-plus"></i> Add Section
+        </button>
       </div>
-      <div class="row" formArrayName="sections">
+
+      <div formArrayName="sections" class="sections-list">
+        <div *ngIf="controls.length === 0" class="empty-sections">
+          No sections added
+        </div>
+
         <div
-          class="row"
+          class="section-item"
           *ngFor="let sectionCtrl of controls; let i = index"
           [formGroupName]="i"
         >
-          <div class="col-xs-8">
+          <div class="section-input">
             <input
               type="text"
-              class="form-control"
+              class="form-input"
               formControlName="desc"
-              placeholder="Description"
+              placeholder="Section title"
             />
           </div>
-          <div class="col-xs-2">
+          
+          <div class="section-number">
             <input
               type="number"
-              class="form-control"
+              class="form-input"
               formControlName="number"
-              placeholder="Number"
+              placeholder="No."
             />
           </div>
-          <div class="col-xs-2">
+          
+          <div class="section-time">
             <input
               type="number"
-              class="form-control"
+              class="form-input"
               formControlName="time"
-              placeholder="Time"
+              placeholder="Duration"
             />
+            <span class="time-label">min</span>
           </div>
-          <div class="col-xs-2">
-            <button
-              class="btn btn-danger"
-              type="button"
-              (click)="onDeleteSection(i)"
-            >
-              X
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <button class="btn btn-primary" type="button" (click)="onAddSection()">
-            Add Section
+          
+          <button
+            type="button"
+            class="btn btn-remove"
+            (click)="onDeleteSection(i)"
+          >
+            <i class="fas fa-trash"></i>
           </button>
         </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>

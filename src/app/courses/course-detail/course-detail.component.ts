@@ -32,6 +32,7 @@ export class CourseDetailComponent {
   onAddToMyCourses() {
     this.courseService.addCourseToMyCourses(this.course); 
     this.dataStorageService.storeMyCourses();
+    this.router.navigate(['/my-courses']);
   }
 
   onCnacelCourses(){}
