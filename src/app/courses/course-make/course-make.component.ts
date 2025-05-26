@@ -43,13 +43,11 @@ export class CourseMakeComponent {
   async onSubmit() {
     const formValue = this.courseForm.value;
 
-    // Преобразуем секции
     for (let i = 0; i < formValue.sections.length; i++) {
       if (this.sectionFiles[i]) {
         formValue.sections[i].fileName = this.sectionFiles[i].name;
         formValue.sections[i].fileData = await this.fileToBase64(this.sectionFiles[i]);
       }
-      // Исправление: копируем number -> numberOfSection
       formValue.sections[i].numberOfSection = formValue.sections[i].number;
     }
 
@@ -74,7 +72,7 @@ export class CourseMakeComponent {
     (<FormArray>this.courseForm.get('sections')).push(
       new FormGroup({
         number: new FormControl(null, Validators.required),
-        descriptions: new FormControl(null, Validators.required), // <-- исправлено
+        descriptions: new FormControl(null, Validators.required), 
         time: new FormControl(null, Validators.required),
       })
     );
@@ -104,7 +102,7 @@ export class CourseMakeComponent {
                 section.numberOfSection,
                 Validators.required
               ),
-              descriptions: new FormControl(section.descriptions, Validators.required), // <-- исправлено
+              descriptions: new FormControl(section.descriptions, Validators.required), 
               time: new FormControl(section.time, Validators.required),
             })
           );
