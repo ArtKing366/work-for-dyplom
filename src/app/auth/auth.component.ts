@@ -25,11 +25,12 @@ export class AuthComponent {
     }
     const email = form.value.email;
     const password = form.value.password;
+    const role = form.value.role || 'student';
 
     let authObs: Observable<AuthResponseData>;
 
     this.isLoading = true;
-    
+
     if (this.isLoginMode) {
       authObs = this.authService.login(email, password);
     } else {
@@ -39,6 +40,9 @@ export class AuthComponent {
     authObs.subscribe(
       resData => {
         console.log(resData);
+        if (!this.isLoginMode) {
+          this.authService.saveUserRole(resData.localId, role, resData.idToken);
+        }
         this.isLoading = false;
         this.router.navigate(['/courses']);
       },

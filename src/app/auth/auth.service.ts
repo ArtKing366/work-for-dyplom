@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from './environment';
 import { catchError, tap } from 'rxjs/operators';
-import { BehaviorSubject, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { User } from './user.model';
 import { Router } from '@angular/router';
 
@@ -18,7 +18,7 @@ export interface AuthResponseData {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   user = new BehaviorSubject<User>(null);
-  // token:string = null;
+  userRole = new BehaviorSubject<string>(null); 
   private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -69,8 +69,19 @@ export class AuthService {
             resData.idToken,
             +resData.expiresIn
           );
+          this.fetchUserRole(resData.localId, resData.idToken);
         })
       );
+  }
+
+  fetchUserRole(userId: string, token: string) {
+    this.http
+      .get<{ role: string }>(
+        `https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/userRoles/${userId}.json?auth=${token}`
+      )
+      .subscribe((res) => {
+        this.userRole.next(res?.role || 'student');
+      });
   }
 
   autoLogin() {
@@ -97,6 +108,9 @@ export class AuthService {
         new Date(userData._tokenExpirationDate).getTime() -
         new Date().getTime();
       this.autoLogout(expirationDurationg);
+    } else {
+      this.user.next(loadedUser);
+      this.fetchUserRole(loadedUser.id, loadedUser.token);
     }
   }
 
@@ -111,7 +125,6 @@ export class AuthService {
   }
 
   autoLogout(expirationDurationg: number) {
-    
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDurationg);
@@ -147,5 +160,14 @@ export class AuthService {
         break;
     }
     return throwError(errorMessage);
+  }
+
+  saveUserRole(userId: string, role: string, token: string) {
+    this.http
+      .put(
+        `https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/userRoles/${userId}.json?auth=${token}`,
+        { role }
+      )
+      .subscribe();
   }
 }

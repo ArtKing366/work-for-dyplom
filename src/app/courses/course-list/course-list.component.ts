@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Course } from '../course.model';
 import { CourseService } from '../course.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-course-list',
@@ -10,11 +11,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CourseListComponent {
   courses: Course[];
+  isTeacher = false;
 
   constructor(
     private courseService: CourseService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -24,6 +27,10 @@ export class CourseListComponent {
       }
     );
     this.courses = this.courseService.getCourses();
+
+    this.authService.userRole.subscribe(role => {
+      this.isTeacher = role === 'teacher';
+    });
   }
 
   onNewCourse() {

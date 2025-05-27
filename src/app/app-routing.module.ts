@@ -11,6 +11,7 @@ import { CourseResolverService } from "./courses/course-resolver.service";
 import { AuthComponent } from "./auth/auth.component";
 import { AuthGuard } from "./auth/auth.guard";
 import { MyProfileEditComponent } from "./my-profile/my-profile-edit/my-profile-edit.component";
+import { TeacherGuard } from './auth/teacher.guard';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/courses', pathMatch: 'full' },
@@ -18,9 +19,9 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: CourseStartComponent },
-      { path: 'new', component: CourseMakeComponent },
+      { path: 'new', component: CourseMakeComponent, canActivate: [TeacherGuard] }, 
       { path: ':id', component: CourseDetailComponent, resolve: [CourseResolverService] },
-      { path: ':id/edit', component: CourseMakeComponent, resolve: [CourseResolverService] },
+      { path: ':id/edit', component: CourseMakeComponent, resolve: [CourseResolverService], canActivate: [TeacherGuard] }, // <--- только для учителей
     ]
   },
   { path: 'my-courses', component: ShoppingCoursesComponent, canActivate: [AuthGuard] },
