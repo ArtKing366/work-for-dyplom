@@ -40,9 +40,6 @@ export class AuthComponent {
     authObs.subscribe(
       resData => {
         console.log(resData);
-        if (!this.isLoginMode) {
-          this.authService.saveUserRole(resData.localId, role, resData.idToken);
-        }
         this.isLoading = false;
         this.router.navigate(['/courses']);
       },
