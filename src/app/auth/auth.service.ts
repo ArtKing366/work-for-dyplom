@@ -23,7 +23,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  signup(email: string, password: string) {
+  signup(email: string, password: string, role: string = 'student') {
     return this.http
       .post<AuthResponseData>(
         `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseAPIKey}`,
@@ -46,6 +46,8 @@ export class AuthService {
             expirationDate
           );
           this.user.next(user);
+          this.saveUserRole(resData.localId, role, resData.idToken);
+          this.userRole.next(role); 
         })
       );
   }
@@ -111,6 +113,10 @@ export class AuthService {
     } else {
       this.user.next(loadedUser);
       this.fetchUserRole(loadedUser.id, loadedUser.token);
+      const expirationDurationg =
+        new Date(userData._tokenExpirationDate).getTime() -
+        new Date().getTime();
+      this.autoLogout(expirationDurationg);
     }
   }
 

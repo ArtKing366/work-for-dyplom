@@ -44,3 +44,10 @@ Thumbs.db
 # Environment files (Angular)
 /src/environments/environment.ts
 environment.ts
+
+# Firebase
+.firebase/
+firebase.json
+.firebaserc
+.firebaseproject
+firebase-debug.log

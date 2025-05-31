@@ -21,7 +21,7 @@ const appRoutes: Routes = [
       { path: '', component: CourseStartComponent },
       { path: 'new', component: CourseMakeComponent, canActivate: [TeacherGuard] }, 
       { path: ':id', component: CourseDetailComponent, resolve: [CourseResolverService] },
-      { path: ':id/edit', component: CourseMakeComponent, resolve: [CourseResolverService], canActivate: [TeacherGuard] }, // <--- только для учителей
+      { path: ':id/edit', component: CourseMakeComponent, resolve: [CourseResolverService], canActivate: [TeacherGuard] },
     ]
   },
   { path: 'my-courses', component: ShoppingCoursesComponent, canActivate: [AuthGuard] },
