@@ -20,7 +20,7 @@ export class DataStorageService {
     const courses = this.courseService.getCourses();
     this.http
       .put(
-        'https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/course.json',
+        'https://project-dyplom-cyber-security-default-rtdb.firebaseio.com/course.json',
         courses
       )
       .subscribe((response) => {
@@ -31,7 +31,7 @@ export class DataStorageService {
   fetchCourses() {
     return this.http
       .get<Course[]>(
-        'https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/course.json'
+        'https://project-dyplom-cyber-security-default-rtdb.firebaseio.com/course.json'
       )
       .pipe(
         map((courses) => {
@@ -55,7 +55,7 @@ export class DataStorageService {
       const myCourses = this.shoppingCoursesService.getCourses();
       this.http
         .put(
-          `https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/my-courses/${user.id}.json?auth=${user.token}`,
+          `https://project-dyplom-cyber-security-default-rtdb.firebaseio.com/my-courses/${user.id}.json?auth=${user.token}`,
           myCourses
         )
         .subscribe();
@@ -67,7 +67,7 @@ export class DataStorageService {
       if (!user) return;
       this.http
         .get<any>(
-          `https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/my-courses/${user.id}.json?auth=${user.token}`
+          `https://project-dyplom-cyber-security-default-rtdb.firebaseio.com/my-courses/${user.id}.json?auth=${user.token}`
         )
         .pipe(
           map((courses) => (courses ? courses : [])),
@@ -85,7 +85,7 @@ export class DataStorageService {
       if (!user) return;
       this.http
         .put(
-          `https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/profiles/${user.id}.json?auth=${user.token}`,
+          `https://project-dyplom-cyber-security-default-rtdb.firebaseio.com/profiles/${user.id}.json?auth=${user.token}`,
           profile
         )
         .subscribe();
@@ -97,7 +97,7 @@ export class DataStorageService {
       if (!user) return callback(null);
       this.http
         .get<any>(
-          `https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/profiles/${user.id}.json?auth=${user.token}`
+          `https://project-dyplom-cyber-security-default-rtdb.firebaseio.com/profiles/${user.id}.json?auth=${user.token}`
         )
         .subscribe((profile) => callback(profile));
     });

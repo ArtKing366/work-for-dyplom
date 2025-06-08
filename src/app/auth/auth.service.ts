@@ -79,7 +79,7 @@ export class AuthService {
   fetchUserRole(userId: string, token: string) {
     this.http
       .get<{ role: string }>(
-        `https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/userRoles/${userId}.json?auth=${token}`
+        `https://project-dyplom-cyber-security-default-rtdb.firebaseio.com/userRoles/${userId}.json?auth=${token}`
       )
       .subscribe((res) => {
         this.userRole.next(res?.role || 'student');
@@ -171,7 +171,7 @@ export class AuthService {
   saveUserRole(userId: string, role: string, token: string) {
     this.http
       .put(
-        `https://ng-dyplom-work-artem-4ae31-default-rtdb.firebaseio.com/userRoles/${userId}.json?auth=${token}`,
+        `https://project-dyplom-cyber-security-default-rtdb.firebaseio.com/userRoles/${userId}.json?auth=${token}`,
         { role }
       )
       .subscribe();
